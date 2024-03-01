@@ -1,0 +1,131 @@
+﻿@model List<Mission08_Team0205.Models.Task>
+
+<style>
+    .quadrant-container {
+        display: grid;
+        grid-template-rows: auto;
+        grid-template-columns: auto auto;
+        gap: 20px;
+    }
+
+    .quadrant {
+        border: 1px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+    }
+
+    .header {
+        text-align: center;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+</style>
+
+<h2>Quadrants View</h2>
+
+<nav>
+    <ul>
+        <li><a asp-controller="Tasks" asp-action="Index">All Tasks</a></li>
+        <li><a asp-controller="Tasks" asp-action="Quadrants">Quadrants</a></li>
+        <!-- Add more navigation links as needed -->
+    </ul>
+</nav>
+
+<div class="quadrant-container">
+    <!-- Urgent and Important -->
+    <div class="quadrant">
+        <div class="header">Urgent and Important</div>
+        @if (Model.Any(t => t.Quadrant == 1 && t.Completed != 1))
+        {
+            var task = Model.First(t => t.Quadrant == 1 && t.Completed != 1);
+            <p><strong>Task ID:</strong> @task.TaskId</p>
+            <p><strong>Task Name:</strong> @task.TaskName</p>
+            <p><strong>Due Date:</strong> @task.DueDate</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
+                <form asp-action="MarkCompleted" asp-route-id="@task.TaskId" method="post" style="display:inline;">
+                    <button type="submit">Mark Completed</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>No Task in Quadrant 1</p>
+        }
+    </div>
+
+    <!-- Urgent and Not Important -->
+    <div class="quadrant">
+        <div class="header">Urgent and Not Important</div>
+        @if (Model.Any(t => t.Quadrant == 2 && t.Completed != 1))
+        {
+            var task = Model.First(t => t.Quadrant == 2 && t.Completed != 1);
+            <p><strong>Task ID:</strong> @task.TaskId</p>
+            <p><strong>Task Name:</strong> @task.TaskName</p>
+            <p><strong>Due Date:</strong> @task.DueDate</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
+                <form asp-action="MarkCompleted" asp-route-id="@task.TaskId" method="post" style="display:inline;">
+                    <button type="submit">Mark Completed</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>No Task in Quadrant 2</p>
+        }
+    </div>
+
+    <!-- Not Urgent and Important -->
+    <div class="quadrant">
+        <div class="header">Not Urgent and Important</div>
+        @if (Model.Any(t => t.Quadrant == 3 && t.Completed != 1))
+        {
+            var task = Model.First(t => t.Quadrant == 3 && t.Completed != 1);
+            <p><strong>Task ID:</strong> @task.TaskId</p>
+            <p><strong>Task Name:</strong> @task.TaskName</p>
+            <p><strong>Due Date:</strong> @task.DueDate</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
+                <form asp-action="MarkCompleted" asp-route-id="@task.TaskId" method="post" style="display:inline;">
+                    <button type="submit">Mark Completed</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>No Task in Quadrant 3</p>
+        }
+    </div>
+
+    <!-- Not Urgent and Not Important -->
+    <div class="quadrant">
+        <div class="header">Not Urgent and Not Important</div>
+        @if (Model.Any(t => t.Quadrant == 4 && t.Completed != 1))
+        {
+            var task = Model.First(t => t.Quadrant == 4 && t.Completed != 1);
+            <p><strong>Task ID:</strong> @task.TaskId</p>
+            <p><strong>Task Name:</strong> @task.TaskName</p>
+            <p><strong>Due Date:</strong> @task.DueDate</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <div>
+                <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
+                <form asp-action="MarkCompleted" asp-route-id="@task.TaskId" method="post" style="display:inline;">
+                    <button type="submit">Mark Completed</button>
+                </form>
+            </div>
+        }
+        else
+        {
+            <p>No Task in Quadrant 4</p>
+        }
+    </div>
+</div>
+
