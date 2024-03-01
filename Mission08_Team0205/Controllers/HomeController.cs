@@ -29,7 +29,7 @@ namespace Mission08_Team0205.Controllers
         }
 
         [HttpPost]
-        public IActionResult Task(Models.Task task)
+        public IActionResult Task(TaskModel task)
         {
             if (ModelState.IsValid)
             {
@@ -67,7 +67,7 @@ namespace Mission08_Team0205.Controllers
         }
 
         [HttpPost]
-        public IActionResult Edit(Models.Task task)
+        public IActionResult Edit(TaskModel task)
         {
                 _taskRepository.Update(task);
                 _taskRepository.SaveChanges();
@@ -75,7 +75,7 @@ namespace Mission08_Team0205.Controllers
         }
 
         [HttpPost]
-        public IActionResult Delete(Models.Task task)
+        public IActionResult Delete(TaskModel task)
         {
             _taskRepository.Tasks.Remove(task);
             return RedirectToAction("Quadrants");
