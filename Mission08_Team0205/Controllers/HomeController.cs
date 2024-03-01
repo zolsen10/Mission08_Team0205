@@ -1,18 +1,19 @@
 using System.Linq;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Mission08_Team0205.Models;
 
 namespace Mission08_Team0205.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ITaskRepository _taskRepository;
-        private readonly ICategoryRepository _categoryRepository;
+        private TasksContext _taskRepository;
+/*        private Category _categoryRepository;*/
 
-        public HomeController(ITaskRepository taskRepository, ICategoryRepository categoryRepository)
+        public HomeController(TasksContext taskRepository)
         {
             _taskRepository = taskRepository;
-            _categoryRepository = categoryRepository;
+/*            _categoryRepository = categoryRepository;*/
         }
 
         public IActionResult Index()
@@ -23,61 +24,60 @@ namespace Mission08_Team0205.Controllers
         [HttpGet]
         public IActionResult Task()
         {
-            ViewBag.Categories = _categoryRepository.GetAllCategories();
+            ViewBag.Categories = _taskRepository.Categories.ToList();
             return View();
         }
 
         [HttpPost]
-        public IActionResult Task(Task task)
+        public IActionResult Task(Models.Task task)
         {
             if (ModelState.IsValid)
             {
-                _taskRepository.AddTask(task);
+                _taskRepository.Tasks.Add(task);
+                _taskRepository.SaveChanges();
                 return RedirectToAction("Index");
             }
-
-            ViewBag.Categories = _categoryRepository.GetAllCategories();
-            return View(task);
+            else
+            {
+                ViewBag.Categories = _taskRepository.Categories.ToList();
+                return View(task);
+            }
         }
 
         public IActionResult Quadrants()
         {
-            var tasks = _taskRepository.GetIncompleteTasks();
+            var tasks = _taskRepository.Tasks.Include(x => x.Category)
+                .ToList();
             return View(tasks);
         }
 
-        [HttpPost]
+/*        [HttpPost]
         public IActionResult MarkCompleted(int taskId)
         {
             _taskRepository.MarkTaskCompleted(taskId);
             return RedirectToAction("Quadrants");
-        }
+        }*/
 
         [HttpGet]
-        public IActionResult Edit(int taskId)
+        public IActionResult Edit(int id)
         {
-            var task = _taskRepository.GetTaskById(taskId);
-            ViewBag.Categories = _categoryRepository.GetAllCategories();
+            var task = _taskRepository.Tasks.Single(x => x.TaskId == id);
+            ViewBag.Categories = _taskRepository.Categories.ToList();
             return View(task);
         }
 
         [HttpPost]
-        public IActionResult Edit(Task task)
+        public IActionResult Edit(Models.Task task)
         {
-            if (ModelState.IsValid)
-            {
-                _taskRepository.UpdateTask(task);
+                _taskRepository.Update(task);
+                _taskRepository.SaveChanges();
                 return RedirectToAction("Quadrants");
-            }
-
-            ViewBag.Categories = _categoryRepository.GetAllCategories();
-            return View(task);
         }
 
         [HttpPost]
-        public IActionResult Delete(int taskId)
+        public IActionResult Delete(Models.Task task)
         {
-            _taskRepository.DeleteTask(taskId);
+            _taskRepository.Tasks.Remove(task);
             return RedirectToAction("Quadrants");
         }
     }

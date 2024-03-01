@@ -17,5 +17,5 @@ public partial class Task
 
     public int? Completed { get; set; }
 
-    public virtual Category? Category { get; set; }
+    public Category? Category { get; set; }
 }

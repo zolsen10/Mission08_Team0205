@@ -41,7 +41,7 @@
             <p><strong>Task ID:</strong> @task.TaskId</p>
             <p><strong>Task Name:</strong> @task.TaskName</p>
             <p><strong>Due Date:</strong> @task.DueDate</p>
-            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.CategoryName : "N/A")</p>
             <div>
                 <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
@@ -65,7 +65,7 @@
             <p><strong>Task ID:</strong> @task.TaskId</p>
             <p><strong>Task Name:</strong> @task.TaskName</p>
             <p><strong>Due Date:</strong> @task.DueDate</p>
-            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.CategoryName : "N/A")</p>
             <div>
                 <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
@@ -89,7 +89,7 @@
             <p><strong>Task ID:</strong> @task.TaskId</p>
             <p><strong>Task Name:</strong> @task.TaskName</p>
             <p><strong>Due Date:</strong> @task.DueDate</p>
-            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.CategoryName : "N/A")</p>
             <div>
                 <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |
@@ -113,7 +113,7 @@
             <p><strong>Task ID:</strong> @task.TaskId</p>
             <p><strong>Task Name:</strong> @task.TaskName</p>
             <p><strong>Due Date:</strong> @task.DueDate</p>
-            <p><strong>Category:</strong> @(task.Category != null ? task.Category.Category1 : "N/A")</p>
+            <p><strong>Category:</strong> @(task.Category != null ? task.Category.CategoryName : "N/A")</p>
             <div>
                 <a asp-action="Edit" asp-route-id="@task.TaskId">Edit</a> |
                 <a asp-action="Delete" asp-route-id="@task.TaskId">Delete</a> |

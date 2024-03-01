@@ -30,7 +30,7 @@ public partial class TasksContext : DbContext
             entity.ToTable("Category");
 
             entity.Property(e => e.CategoryId).ValueGeneratedNever();
-            entity.Property(e => e.Category1).HasColumnName("Category");
+            entity.Property(e => e.CategoryName).HasColumnName("Category");
         });
 
         modelBuilder.Entity<Task>(entity =>
