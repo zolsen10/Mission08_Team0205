@@ -19,7 +19,7 @@
 <div class="row">
     <!-- Urgent and Important -->
     <div class="quadrant col-lg-6">
-        <div class="header">Not Urgent and Not Important</div>
+        <div class="header">Urgent and Important</div>
         @if (Model.Any(t => t.Quadrant == 1 && t.CompletedTask == false))
         {
             foreach (var task in Model.Where(t => t.Quadrant == 1 && t.CompletedTask == false))
@@ -45,7 +45,7 @@
 
     <!-- Urgent and Not Important -->
     <div class="quadrant col-lg-6">
-        <div class="header">Not Urgent and Not Important</div>
+        <div class="header">Urgent and Not Important</div>
         @if (Model.Any(t => t.Quadrant == 2 && t.CompletedTask == false))
         {
             foreach (var task in Model.Where(t => t.Quadrant == 2 && t.CompletedTask == false))
@@ -72,7 +72,7 @@
 <div class="row">
     <!-- Not Urgent and Important -->
     <div class="quadrant col-lg-6">
-        <div class="header">Not Urgent and Not Important</div>
+        <div class="header">Not Urgent and Important</div>
         @if (Model.Any(t => t.Quadrant == 3 && t.CompletedTask == false))
         {
             foreach (var task in Model.Where(t => t.Quadrant == 3 && t.CompletedTask == false))
