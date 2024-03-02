@@ -1,0 +1,49 @@
+﻿@model TaskModel
+@{
+    ViewData["Title"] = "Add/Edit Task";
+}
+<div class="row">
+    <div class="col-4"></div>
+    <div class="col-4">
+        <h1>Add Task</h1>
+        <form method="post">
+            <input type="hidden" asp-for="TaskId" />
+            <br />
+            <label asp-for="TaskName">TaskName:</label>
+            <input asp-for="TaskName" required><br>
+
+            <label asp-for="DueDate">DueDate:</label>
+            <input asp-for="DueDate"><br>
+
+            <label asp-for="Quadrant">Quadrant:</label>
+            <select asp-for="Quadrant" required>
+                <option value="1">1 - Important/Urgent</option>
+                <option value="2">2 - Important/Not Urgent</option>
+                <option value="3">3 - Not Important/Urgent</option>
+                <option value="4">4 - Not Important/Not Urgent</option>
+            </select>
+            <br />
+
+            <label asp-for="CategoryId">Category:</label>
+            <select asp-for="CategoryId" required>
+                <option value="">Select a Category</option>
+                @foreach (Category c in ViewBag.Categories)
+                {
+                    <option value="@c.CategoryId">@c.CategoryName</option>
+                }
+            </select>
+            <br />
+
+            <label asp-for="CompletedTask">Completed:</label>
+            <div>
+                <input asp-for="CompletedTask" type="radio" value="true" /> Yes
+                <input asp-for="CompletedTask" type="radio" value="false" /> No
+            </div>
+
+            <br />
+            <button type="submit">Submit</button>
+            <div asp-validation-summary="All"></div>
+        </form>
+    </div>
+    <div class="col-4"></div>
+</div>
