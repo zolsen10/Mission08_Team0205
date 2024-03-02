@@ -25,7 +25,7 @@ namespace Mission08_Team0205.Controllers
         public IActionResult Task()
         {
             ViewBag.Categories = _taskRepository.Categories.ToList();
-            return View();
+            return View(new TaskModel());
         }
 
         [HttpPost]
@@ -35,7 +35,7 @@ namespace Mission08_Team0205.Controllers
             {
                 _taskRepository.Tasks.Add(task);
                 _taskRepository.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Task");
             }
             else
             {
@@ -63,7 +63,7 @@ namespace Mission08_Team0205.Controllers
         {
             var task = _taskRepository.Tasks.Single(x => x.TaskId == id);
             ViewBag.Categories = _taskRepository.Categories.ToList();
-            return View(task);
+            return View("Task", task);
         }
 
         [HttpPost]
@@ -73,11 +73,28 @@ namespace Mission08_Team0205.Controllers
                 _taskRepository.SaveChanges();
                 return RedirectToAction("Quadrants");
         }
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var task = _taskRepository.Tasks.Single(x => x.TaskId == id);
+            return View(task);
+        }
 
         [HttpPost]
         public IActionResult Delete(TaskModel task)
         {
             _taskRepository.Tasks.Remove(task);
+            _taskRepository.SaveChanges();
+            return RedirectToAction("Quadrants");
+        }
+
+        [HttpGet]
+        public IActionResult MarkCompleted(int id)
+        {
+            var task = _taskRepository.Tasks.Single(x => x.TaskId == id);
+            task.CompletedTask = true;
+            _taskRepository.Update(task);
+            _taskRepository.SaveChanges();
             return RedirectToAction("Quadrants");
         }
     }
